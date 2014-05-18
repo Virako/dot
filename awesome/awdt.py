@@ -88,7 +88,7 @@ def main():
     # the files needed
     cfg_dir = os.path.expanduser("~/.config/awesome")
     rc_real = os.path.join(cfg_dir, "rc.lua")
-    rc_test = os.path.join(cfg_dir, "rc_test.lua")
+    rc_test = os.path.join(cfg_dir, "rc.lua")
     rc_original = os.path.join(cfg_dir, "rc_original.lua")
     xpids_tmp = os.path.join(gettempdir(), "xpids")
     apids_tmp = os.path.join(gettempdir(), "apids")

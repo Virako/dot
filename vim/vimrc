@@ -1,6 +1,7 @@
 set nocompatible
 filetype on
 filetype plugin on
+syntax on
 filetype plugin indent on
 
 set smartindent
@@ -12,16 +13,13 @@ set cursorcolumn
 set smartcase
 set incsearch
 set hlsearch
-"set gfn=Monaco
-
-
-syntax on
 
 if has("gui_running")
   colorscheme default
   set bg=light
 else
   colorscheme jellybeans
+  set gfn=Inconsolata-dz\ 9
 endif
 
 set tabstop=4
@@ -29,20 +27,37 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set smarttab
-set textwidth=80
-set colorcolumn=80
+set textwidth=100
+set colorcolumn=100
 set t_Co=256
+set tabpagemax=200
 
 "encoding
 set encoding=utf-8
 set laststatus=2
 
-
 let g:DoxygenToolkit_authorName="Victor Ramirez <virako.9@gmail.com>"
+
+" syntastic
+call pathogen#infect()
+"let g:syntastic_cpp_include_dirs = ['/usr/include/qt4/','/usr/include/irrlicht/','.']
+let g:syntastic_cpp_check_header = 1
+" let g:syntastic_auto_jump=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_check_on_open=1
+let g:syntastic_cpp_checkers = ['cppcheck', 'gcc', 'cpplint']
+"let g:syntastic_enable_signs=1
 
 "White spaces"
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+highlight TabSpace ctermbg=yellow ctermfg=white guibg=#592929
+match TabSpace /\t/
+
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
@@ -51,8 +66,15 @@ autocmd BufWinLeave * call clearmatches()
 "Keys"
 nmap <F2> :NERDTree<CR>
 nmap <F3> :TagbarToggle<CR>
-nmap <F4> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR>
+nmap <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+"F5 and F6 pep8
 nmap <F7> :Dox<CR>
+nmap <F8> :! cd build && cmake .. && make -j8<CR>
+nmap <F10> :GitGutterToggle<CR>
+nmap <F12> :%s/\s\+$//<CR>
+nmap gn   :lnext<CR>
+nmap gp   :lprev<CR>
+nmap gb   gT
 
 "minibufexpl"
 "let g:miniBufExplMapWindowNavVim = 1
@@ -60,5 +82,14 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+"powerline
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+set noshowmode

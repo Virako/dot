@@ -42,7 +42,6 @@ run_once('xcalib -co 96 -a')
 os.setlocale('es_ES.UTF-8')
 -- }}}
 
-
 -- {{{ naughty theme
 naughty.config.default_preset.font             = beautiful.notify_font
 naughty.config.default_preset.fg               = beautiful.notify_fg
@@ -133,7 +132,7 @@ mydebugmenu = {
     { "CHECK", config_dir .. "/awdt.py check" },
     --{ "init test FullHD", config_dir .. "/awdt.py start -t -d 1"},
     --{ "init test WXGA+", config_dir .. "/awdt.py start -t -s 1440x900 -d 2"},
-    { "INIT", config_dir .. "/awdt.py start -s 1440x900 -d 3"},
+    { "INIT", config_dir .. "/awdt.py start -s 800x600 -d 3"},
     --{ "restart awesome", config_dir .. "/awdt.py restart" },
     --{ "stop xephyr", config_dir .. "/awdt.py stop" },
 }
@@ -189,19 +188,6 @@ memwidget:set_background_color("#00000044")
 vicious.register(memwidget, vicious.widgets.mem, "$1", 5)
 -- }}}
 
--- {{{ Network usage widget
-my_net=blingbling.net.new()
-my_net:set_height(16)
- --activate popup with ip informations on the net widget
-my_net:set_ippopup()
-my_net:set_show_text(true)
---my_net:set_v_margin(3)
-vicious.cache(vicious.widgets.net)
-vicious.register(my_net, vicious.widgets.net,
-                '<span color="#CC9393">${eth0 down_kb}</span>' ..
-                ' <span color="#7F9F7F">${eth0 up_kb}</span>', 2)
--- }}}
-
 -- {{{ Cpu widget
 cpu=blingbling.classical_graph.new()
 cpu:set_font_size(10)
@@ -222,105 +208,6 @@ blingbling.popups.htop(cpu.widget,
           root_color = beautiful.notify_bg,
           terminal = "roxterm"})
 vicious.register(cpu, vicious.widgets.cpu, '$1',2)
-
---Cores Widgets
-mycore1 = blingbling.value_text_box.new()
-mycore1:set_width(10)
-mycore1:set_height(16)
-mycore1:set_filled(true)
-mycore1:set_filled_color(beautiful.color_dgrey)
-mycore1:set_rounded_size(0.6)
-mycore1:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore1:set_font_size(10)
-mycore1:set_background_color("#00000044")
-mycore1:set_label("$percent%")
-vicious.register(mycore1, vicious.widgets.cpu, "$2", 3)
-
-mycore2 = blingbling.value_text_box.new()
-mycore2:set_width(10)
-mycore2:set_height(16)
-mycore2:set_filled(true)
-mycore2:set_filled_color(beautiful.color_dgrey)
-mycore2:set_rounded_size(0.6)
-mycore2:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore2:set_font_size(10)
-mycore2:set_background_color("#00000044")
-mycore2:set_label("$percent%")
-vicious.register(mycore2, vicious.widgets.cpu, "$3", 3)
-
-mycore3 = blingbling.value_text_box.new()
-mycore3:set_width(10)
-mycore3:set_height(16)
-mycore3:set_filled(true)
-mycore3:set_filled_color(beautiful.color_dgrey)
-mycore3:set_rounded_size(0.6)
-mycore3:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore3:set_font_size(10)
-mycore3:set_background_color("#00000044")
-mycore3:set_label("$percent%")
-vicious.register(mycore3, vicious.widgets.cpu, "$4", 3)
-
-mycore4 = blingbling.value_text_box.new()
-mycore4:set_width(10)
-mycore4:set_height(16)
-mycore4:set_filled(true)
-mycore4:set_filled_color(beautiful.color_dgrey)
-mycore4:set_rounded_size(0.6)
-mycore4:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore4:set_font_size(10)
-mycore4:set_background_color("#00000044")
-mycore4:set_label("$percent%")
-vicious.register(mycore4, vicious.widgets.cpu, "$5", 3)
-
-mycore5 = blingbling.value_text_box.new()
-mycore5:set_width(10)
-mycore5:set_height(16)
-mycore5:set_filled(true)
-mycore5:set_filled_color(beautiful.color_dgrey)
-mycore5:set_rounded_size(0.6)
-mycore5:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore5:set_font_size(10)
-mycore5:set_background_color("#00000044")
-mycore5:set_label("$percent%")
-vicious.register(mycore5, vicious.widgets.cpu, "$6", 3)
-
-mycore6 = blingbling.value_text_box.new()
-mycore6:set_width(10)
-mycore6:set_height(16)
-mycore6:set_filled(true)
-mycore6:set_filled_color(beautiful.color_dgrey)
-mycore6:set_rounded_size(0.6)
-mycore6:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore6:set_font_size(10)
-mycore6:set_background_color("#00000044")
-mycore6:set_label("$percent%")
-vicious.register(mycore6, vicious.widgets.cpu, "$7", 3)
-
-mycore7 = blingbling.value_text_box.new()
-mycore7:set_width(10)
-mycore7:set_height(16)
-mycore7:set_filled(true)
-mycore7:set_filled_color(beautiful.color_dgrey)
-mycore7:set_rounded_size(0.6)
-mycore7:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore7:set_font_size(10)
-mycore7:set_background_color("#00000044")
-mycore7:set_label("$percent%")
-vicious.register(mycore7, vicious.widgets.cpu, "$8", 3)
-
-mycore8 = blingbling.value_text_box.new()
-mycore8:set_width(10)
-mycore8:set_height(16)
-mycore8:set_filled(true)
-mycore8:set_filled_color(beautiful.color_dgrey)
-mycore8:set_rounded_size(0.6)
-mycore8:set_values_text_color({{"#88aa00ff",0},{"#d4aa00ff", 0.5},{beautiful.color_red,0.75}})
-mycore8:set_font_size(10)
-mycore8:set_background_color("#00000044")
-mycore8:set_label("$percent%")
-vicious.register(mycore8, vicious.widgets.cpu, "$9", 3)
--- }}}
-
 
 -- {{{ Filesystem widget
 fsroot = blingbling.value_text_box.new()
@@ -348,13 +235,6 @@ fshome:set_label("~/ $percent%")
 vicious.register(fshome, vicious.widgets.fs, "${/home used_p}", 120 )
 -- }}}
 
--- {{{ task_warrior menu
- task_warrior=blingbling.task_warrior.new(beautiful.tasks)
- task_warrior:set_task_done_icon(beautiful.task_done)
- task_warrior:set_task_icon(beautiful.task)
- task_warrior:set_project_icon(beautiful.project)
--- }}}
-
 -- Create a wifiwidget
  
 -- Wifi widget!!!!
@@ -368,51 +248,11 @@ wifiwidget:buttons(awful.util.table.join( awful.button({}, 1,
         awful.util.spawn_with_shell(terminal .. " -e wicd-curses")
     end)
                     ))
--- {{{ Calendar widget
---my_cal =blingbling.calendar.new({type = "imagebox", image = beautiful.calendar})
---my_cal:set_cell_padding(2)
---my_cal:set_title_font_size(10)
---my_cal:set_font_size(10)
---my_cal:set_inter_margin(1)
---my_cal:set_columns_lines_titles_font_size(10)
---my_cal:set_columns_lines_titles_text_color("#d4aa00ff")
--- }}}
 
 -- {{{ Pomodoro icon
 pomodoro_icon = widget({ type = "imagebox" })
 pomodoro_icon.image = image(config_dir .. "/pomodoro.png")
 -- }}}
-
--- {{{ MPD
---Mpd widgets
-my_mpd=blingbling.mpd_visualizer.new()
-my_mpd:set_height(16)
-my_mpd:set_width(80)
-my_mpd:update()
-my_mpd:set_line(true)
---my_mpd:set_h_margin(2)
-my_mpd:set_mpc_commands()
-my_mpd:set_launch_mpd_client(terminal .. " -e ncmpcpp")
-my_mpd:set_show_text(true)
-my_mpd:set_font_size(10)
-my_mpd:set_graph_color("#d4aa00ff")
-my_mpd:set_label("MPD: $artist > $title")
-my_mpd_volume=blingbling.volume.new()
-my_mpd_volume:set_height(16)
-my_mpd_volume:set_width(20)
---my_mpd_volume:set_v_margin(3)
-my_mpd_volume:update_mpd()
-my_mpd_volume:set_bar(true)
-vicious.register(my_mpd, vicious.widgets.mpd,
-    function (widget, args)
-        if args["{state}"] == "Stop" then
-            return " - "
-        else
-            return args["{Artist}"]..' - '.. args["{Title}"]
-        end
-    end, 10)
--- }}}
-
 -- {{{ Keyboard widget
 kbdcfg = {}
 kbdcfg.cmd = "setxkbmap -layout"
@@ -534,18 +374,14 @@ for s = 1, screen.count() do
         },
         datewidget,
         --my_cal.widget,
-        --task_warrior.widget,
         s == 1 and mysystray or nil,
         kbdcfg.widget,
         fshome.widget,
         fsroot.widget,
-        --mycore8.widget, mycore7.widget, mycore6.widget, mycore5.widget, mycore4.widget, mycore3.widget, mycore2.widget, mycore1.widget,
         cpu.widget,
         memwidget.widget,
         wifiwidget,space,
         pomodoro.widget,pomodoro_icon,
-        --my_net.widget,
-        --my_mpd.widget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -623,19 +459,9 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86Word",  function () awful.util.spawn("libreoffice --writer") end),
     awful.key({ }, "XF86Messenger",  function () awful.util.spawn("xchat") end),
     awful.key({ }, "Scroll_Lock",  function () awful.util.spawn("i3lock -t -i " .. config_dir .. "/panic.png") end),
-    awful.key({ }, "XF86TouchpadToggle",  function () awful.util.spawn("") end),
     awful.key({ }, "XF86Eject",  function () awful.util.spawn("eject") end),
-    awful.key({ }, "XF86Search",  function () awful.util.spawn("") end),
     awful.key({ }, "XF86Mail",  function () awful.util.spawn("chromium") end),
-    awful.key({ }, "XF86HomePage",  function () awful.util.spawn("") end),
-    awful.key({ }, "XF86Calculator",  function () awful.util.spawn("") end),
-    awful.key({ }, "XF86AudioPrev",  function () awful.util.spawn_with_shell("ncmpcpp prev") end),
-    awful.key({ }, "XF86AudioNext",  function () awful.util.spawn_with_shell("ncmpcpp next") end),
-    awful.key({ }, "XF86AudioStop",  function () awful.util.spawn_with_shell("ncmpcpp stop") end),
-    awful.key({ }, "XF86AudioPlay",  function () awful.util.spawn_with_shell("ncmpcpp play") end),
-    awful.key({ }, "XF86Tools",  function () awful.util.spawn(terminal .. " -e ncmpcpp") end),
-    awful.key({ }, "XF86WebCam",  function () awful.util.spawn("shutter") end),
-    awful.key({ }, "XF86Launch1",  function () awful.util.spawn("") end),
+    awful.key({ }, "XF86WebCam",  function () awful.util.spawn("scrot") end),
 
 
     -- Prompt
@@ -655,9 +481,6 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "c",
         function (c)
             c:kill()
-           --TODO
-           --zenity --question --title='Quit?' --text='Quit';
-           --if awful.util.pread(" echo $?") == "1\n" then c:kill() end
         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
@@ -736,15 +559,9 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    -- xchat
-    { rule = { class = "xchat" },
-      properties = { tag = tags[1][1],switchtotag = true } },
     -- Chromium
     { rule = { class = "chromium" },
       properties = { tag = tags[1][3],switchtotag = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
@@ -777,4 +594,3 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}

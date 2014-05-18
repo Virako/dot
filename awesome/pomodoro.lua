@@ -3,6 +3,7 @@ pomodoro = {}
 -- tweak these values in seconds to your liking
 pomodoro.pause_duration = 300
 pomodoro.work_duration = 1200
+pomodoro.change = 30
  
 pomodoro.pause_title = "Pause finished."
 pomodoro.pause_text = "Get back to work!"
@@ -54,15 +55,15 @@ pomodoro.widget:buttons(
     end),
     awful.button({ }, 4, function()
       pomodoro.timer:stop()
-      pomodoro:settime(pomodoro.work_duration+60)
-      pomodoro.work_duration = pomodoro.work_duration+60
+      pomodoro:settime(pomodoro.work_duration+pomodoro.change)
+      pomodoro.work_duration = pomodoro.work_duration+pomodoro.change
       pomodoro.left = pomodoro.work_duration
     end),
     awful.button({ }, 5, function()
     pomodoro.timer:stop()
-    if pomodoro.work_duration > 60 then
-        pomodoro:settime(pomodoro.work_duration-60)
-        pomodoro.work_duration = pomodoro.work_duration-60
+    if pomodoro.work_duration > pomodoro.change then
+        pomodoro:settime(pomodoro.work_duration-pomodoro.change)
+        pomodoro.work_duration = pomodoro.work_duration-pomodoro.change
         pomodoro.left = pomodoro.work_duration
     end
 end)
